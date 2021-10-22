@@ -21,6 +21,11 @@ class trainer:
         self.saved_dir=saved_dir
         self.device=device
         self.category_names=category_names
+        temp_dict={}
+        for i in range(len(category_names)):
+            temp_dict[i]=category_names[i]
+        self.category_dict=temp_dict
+        print(self.category_dict)
 
     def validation(self, epoch, model, data_loader, criterion, device):
         print(f'Start validation #{epoch}')
@@ -36,7 +41,7 @@ class trainer:
             for step, (images, masks, _) in enumerate(data_loader):
                 
                 images = torch.stack(images)       
-                masks = torch.stack(mask).long()  
+                masks = torch.stack(masks).long()  
 
                 images, masks = images.to(device), masks.to(device)            
                 
@@ -55,11 +60,22 @@ class trainer:
 
                 #for wandb
                 example_images.append(wandb.Image(
-                    images[0].np(),caption=f'Pred:{outputs[0].item()} Truth:{mask[0]}'
+                    images[0],
+                    masks={
+                        "predictions" : {
+                            "mask_data" : outputs[0],
+                            "class_labels" : self.category_dict
+                        },
+                        "ground_truth" : {
+                            "mask_data" : masks[0],
+                            "class_labels" : self.category_dict
+                        }
+                    },
+                    caption=f'epoch:{epoch} step:{step}'
                 ))
-            
+
             acc, acc_cls, mIoU, fwavacc, IoU = label_accuracy_score(hist)
-            IoU_by_class = [{classes : round(IoU,4)} for IoU, classes in zip(IoU , self.category_names)]
+            IoU_by_class = {classes : round(IoU,4) for IoU, classes in zip(IoU , self.category_names)}
             
             avrg_loss = total_loss / cnt
             wandb.log({
@@ -67,8 +83,9 @@ class trainer:
                 'valid/acc' :round(acc, 4), 
                 'valid/classification_acc':acc_cls,
                 'valid/mIoU': round(mIoU,4),
-                'valid/IoU_by_class':IoU_by_class,
+                'IoU_by_class':IoU_by_class,
                 'examples':example_images,})
+
     
             print(f'Validation #{epoch}  Average Loss: {round(avrg_loss.item(), 4)}, Accuracy : {round(acc, 4)}, \
                     mIoU: {round(mIoU, 4)}')
@@ -120,7 +137,8 @@ class trainer:
                         'train/loss':round(loss.item(),4),
                         'train/acc': acc, 
                         'train/classification_acc':acc_cls,
-                        'train/mIoU': round(mIoU,4)
+                        'train/mIoU': round(mIoU,4),
+                        'config/lr': optimizer.param_groups[0]["lr"]
                         })
                 
             # validation 주기에 따른 loss 출력 및 best model 저장

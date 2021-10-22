@@ -18,6 +18,10 @@ from torchvision import models
 import segmentation_models_pytorch as smp
 import wandb
 
+'''
+python main.py --mode=train --num_epochs=100 --model_name=pspnet_efficientb0_mIoUbest
+python main.py --mode=test --model_name=pspnet_efficientb0_mIoUbest --saved_epoch=92
+'''
 
 def seed_everything(seed):
     torch.manual_seed(seed)
@@ -88,11 +92,14 @@ def train(mode,saved_dir,num_epochs,batch_size,learning_rate,model_name,saved_ep
         classes=11,                      # model output channels (number of classes in your dataset)
     )
     
-    wandb.watch(
+    
+    if mode=='train':
+        #for wandb
+        wandb.watch(
             model, criterion=None, log="gradients", log_freq=100, idx=None,
             log_graph=(False)
         )
-    if mode=='train':
+
         # 모델 저장 함수 정의
         val_every = 1
         if not os.path.isdir(saved_dir):                                                           
@@ -128,7 +135,7 @@ def train(mode,saved_dir,num_epochs,batch_size,learning_rate,model_name,saved_ep
                                         ignore_index=True)
 
         # submission.csv로 저장
-        submission.to_csv(f'../submission/{model_name}.csv', index=False)
+        submission.to_csv(f'../submission/{model_name}_epoch{saved_epoch}.csv', index=False)
         print('Prediction result saved!')
 
 if __name__ == '__main__':
@@ -145,8 +152,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     #wandb 설정
-    wandb.init(project=args.model_name,config=args)
-    #wandb.config.update(args)
+    if args.mode=='train':
+        wandb.init(project=args.model_name,config=args)
+        #wandb.config.update(args)
+
 
     #seed 고정
     seed_everything(args.seed)
