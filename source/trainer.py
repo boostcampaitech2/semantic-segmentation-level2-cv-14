@@ -48,7 +48,7 @@ class trainer:
                 # device 할당
                 model = model.to(device)
                 
-                outputs = model(images)#['out']
+                outputs = model(images) #['out']
                 loss = criterion(outputs, masks)
                 total_loss += loss
                 cnt += 1
@@ -148,7 +148,8 @@ class trainer:
                     print(f"Best performance at epoch: {epoch + 1}")
                     print(f"Save model in {self.saved_dir}")
                     best_mIoU = mIoU
-                    save_model(model, self.saved_dir,model_name+'_epoch'+str(epoch+1)+'.pt')
+                    #save_model(model, self.saved_dir,model_name+'_epoch'+str(epoch+1)+'.pt')
+                    save_model(model, self.saved_dir,model_name+'.pt')
                     saved_epoch=epoch+1
 
         return saved_epoch

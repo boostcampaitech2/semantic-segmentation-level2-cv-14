@@ -85,7 +85,7 @@ def train(mode,saved_dir,num_epochs,batch_size,learning_rate,model_name,saved_ep
     # model 선언
     #model = models.segmentation.fcn_resnet50(pretrained=True)
     #model.classifier[4] = nn.Conv2d(512, 11, kernel_size=1)
-    model = smp.PSPNet(
+    model = smp.DeepLabV3Plus(
         encoder_name="efficientnet-b0",        # choose encoder, e.g. mobilenet_v2 or efficientnet-b7
         encoder_weights="imagenet",     # use `imagenet` pre-trained weights for encoder initialization
         in_channels=3,                  # model input channels (1 for gray-scale images, 3 for RGB, etc.)
@@ -119,7 +119,8 @@ def train(mode,saved_dir,num_epochs,batch_size,learning_rate,model_name,saved_ep
         submission = pd.read_csv('../submission/sample_submission.csv', index_col=None)
 
         #모델 불러오기
-        model_path = os.path.join(saved_dir, model_name+'_epoch'+saved_epoch+'.pt')
+        #model_path = os.path.join(saved_dir, model_name+'_epoch'+saved_epoch+'/model.pt')
+        model_path = os.path.join(saved_dir, model_name+'.pt')
         checkpoint = torch.load(model_path, map_location=device)
         state_dict = checkpoint.state_dict()
         model.load_state_dict(state_dict)
@@ -153,7 +154,7 @@ if __name__ == '__main__':
 
     #wandb 설정
     if args.mode=='train':
-        wandb.init(project=args.model_name,config=args)
+        wandb.init(project='segmentation',name=args.model_name,config=args)
         #wandb.config.update(args)
 
 
