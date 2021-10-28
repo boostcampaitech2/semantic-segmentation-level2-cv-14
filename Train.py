@@ -189,9 +189,9 @@ if __name__ == '__main__':
 
     # 하드코딩으로 config 값을 수정하고싶다면 아래와 같이 수정할 수 있습니다.
     '''
-    args['path_dataset_root'] = 'C:/Dataset/SemanticSegmentation/'
-    args['path_train_json'] = 'C:/Dataset/SemanticSegmentation/train.json'
-    args['path_valid_json'] = 'C:/Dataset/SemanticSegmentation/val.json'
+    args['path_dataset_root'] = '../input/data/'
+    args['path_train_json'] = '../input/data/train.json'
+    args['path_valid_json'] = '../input/data/val.json'
     args['path_project_root'] = './Projects/UNetPP_Efficientb4_aug2' # 새로 생성될 디렉토리를 지정합니다.
 
     args['random_fix'] = True

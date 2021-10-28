@@ -130,8 +130,8 @@ if __name__ == '__main__':
 
     # 하드코딩으로 config 값을 수정하고싶다면 아래와 같이 수정할 수 있습니다.
     '''
-    args['path_dataset_root'] = 'C:/Dataset/SemanticSegmentation/'
-    args['path_test_json'] = 'C:/Dataset/SemanticSegmentation/test.json'
+    args['path_dataset_root'] = '../input/data/'
+    args['path_test_json'] = '../input/data//test.json'
     args['path_checkpoint'] = './Projects/UNetPP_Efficientb4_aug2/best_score.pt'
     args['path_save'] = './Projects/UNetPP_Efficientb4_aug2/submission.csv'
 
