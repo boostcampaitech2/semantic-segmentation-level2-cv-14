@@ -1,6 +1,6 @@
 {
-  "path_dataset_root": "C:/Dataset/SemanticSegmentation/",
-  "path_test_json": "C:/Dataset/SemanticSegmentation/test.json",
+  "path_dataset_root": "../input/data/",
+  "path_test_json": "../input/data/test.json",
   "path_checkpoint": "./Projects/UNetPP_Efficientb4_aug2/best_score.pt",
   "path_save": "./Projects/UNetPP_Efficientb4_aug2/submission.csv",
   "random_fix": true,
