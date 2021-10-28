@@ -1,0 +1,15 @@
+{
+  "path_dataset_root": "C:/Dataset/SemanticSegmentation/",
+  "path_test_json": "C:/Dataset/SemanticSegmentation/test.json",
+  "path_checkpoint": "./Projects/UNetPP_Efficientb4_aug2/best_score.pt",
+  "path_save": "./Projects/UNetPP_Efficientb4_aug2/submission.csv",
+  "random_fix": true,
+  "random_seed": 21,
+  "model": "UNetPP_Efficientb4",
+  "model_batch_size": 8,
+  "data_num_workers": 2,
+  "data_loading_mode": "realtime",
+  "data_test_transform": "Default",
+  "data_tta_transform": "HorizontalFlip_Rotate90",
+  "data_target_size": 256
+}
