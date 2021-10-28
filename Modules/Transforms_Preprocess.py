@@ -26,10 +26,11 @@ def HorizontalFlip_Rotate90():
         ToTensorV2()
     ])
 
-def HorizontalFlip_Rotate90_Multiscale():
+def HorizontalFlip_Rotate90_CLAHE():
     return alb.Compose([
         alb.HorizontalFlip(p=0.5),
         alb.RandomRotate90(p=0.5),
+        alb.CLAHE(p=0.5),
         alb.Normalize(),
         ToTensorV2()
     ])
