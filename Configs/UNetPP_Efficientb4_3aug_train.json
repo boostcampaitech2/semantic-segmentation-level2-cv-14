@@ -1,0 +1,19 @@
+{
+  "path_dataset_root": "C:/Dataset/SemanticSegmentation/",
+  "path_train_json": "C:/Dataset/SemanticSegmentation/train.json",
+  "path_valid_json": "C:/Dataset/SemanticSegmentation/val.json",
+  "path_project_root": "./Projects/UNetPP_Efficientb4_aug2",
+  "random_fix": true,
+  "random_seed": 21,
+  "model": "UNetPP_Efficientb4",
+  "model_num_epochs": 200,
+  "model_batch_size": 8,
+  "loss": "CrossEntropyLoss",
+  "optimizer": "Adam",
+  "optimizer_learning_rate": 0.0001,
+  "optimizer_weight_decay": 1e-06,
+  "data_num_workers": 2,
+  "data_loading_mode": "preload",
+  "data_train_transform": "HorizontalFlip_Rotate90_CLAHE",
+  "data_valid_transform": "Default"
+}
