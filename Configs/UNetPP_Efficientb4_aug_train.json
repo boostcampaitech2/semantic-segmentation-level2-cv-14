@@ -13,7 +13,7 @@
   "optimizer_learning_rate": 0.0001,
   "optimizer_weight_decay": 1e-06,
   "data_num_workers": 2,
-  "data_loading_mode": "realtime",
+  "data_loading_mode": "preload",
   "data_train_transform": "HorizontalFlip_Rotate90",
   "data_valid_transform": "Default"
 }
