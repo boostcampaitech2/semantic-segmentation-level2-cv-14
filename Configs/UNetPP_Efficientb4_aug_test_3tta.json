@@ -10,6 +10,6 @@
   "data_num_workers": 2,
   "data_loading_mode": "realtime",
   "data_test_transform": "Default",
-  "data_tta_transform": "HorizontalFlip_Rotate90_MultiScale",
+  "data_tta_transform": "HorizontalFlip_Rotate90_CLAHE",
   "data_target_size": 256
 }
