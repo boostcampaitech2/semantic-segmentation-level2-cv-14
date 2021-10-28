@@ -57,7 +57,7 @@ class DataSet_Trash(Dataset):
             data["info"] = self.coco.loadImgs(index)[0]
 
             image = cv2.imread(os.path.join(self.dataset_root, data["info"]['file_name']))
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB).astype(np.float32)
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             data["image"] = image
 
             ann_ids = self.coco.getAnnIds(imgIds=data["info"]['id'])
