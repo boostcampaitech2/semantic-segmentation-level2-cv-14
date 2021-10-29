@@ -1,3 +1,23 @@
+# 베이스라인에 HRNet 포함
+- HRNet 학습을 위해선 imagenet pretrained model을 다운받아야합니다.
+- 이 [링크](https://1drv.ms/u/s!Aus8VCZ_C_33dKvqI6pBZlifgJk)에서 hrnetv2_w48_imagenet_pretrained.pth 모델을 다운받아 `Modules/Hrnet_Sources/` 아래 두시면 됩니다.
+
+## TODO
+- [x] 베이스라인에 Hrnet 포함
+- [ ] 데이터셋 경로 다시 메인 브랜치대로 바꾸기
+- [x] 'segmentation'가상환경에서 돌아가는지 확인
+- [ ] 200 epoch 모델 돌리고 결과 잘 나오면 메인 브랜치에 반영하기
+
+
+# 수정한 사항
+- Configs
+   - `Hrnet_Ocr_train.json`, `Hrnet_Ocr_test.json` 추가
+- Modules
+   - `Hrnet_Sources` 디렉토리 추가. 
+   - `Models.py` 에 Hrnet_Seg_Ocr 함수 추가
+
+-----------------
+
 # Train
 이 코드는 다음 기능을 포함합니다.
  - pytorch 기반의 Semantic Segmentation Model 을 학습합니다.
