@@ -118,7 +118,7 @@ def Main(args):
     # 학습
     n_class = len(train_dataset.Categories())
     best_mIoU = 0
-    hist = np.zeros((n_class, n_class))
+    
     for epoch in range(1, args['model_num_epochs'] + 1):
         for stage in ['train', 'valid']:
             if stage == 'train':
@@ -131,6 +131,7 @@ def Main(args):
                 color = 96
 
             total_loss = 0
+            hist = np.zeros((n_class, n_class))
             for images, masks in tqdm(loader):
                 images, masks = images.to(device), masks.long().to(device)
 
