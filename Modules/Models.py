@@ -7,8 +7,13 @@ import torch.nn.functional as F
 import torch
 import torch.nn as nn
 
-from .Hrnet_Sources.Model.seg_hrnet_ocr import get_seg_model
-from .Hrnet_Sources.Model.seg_hrnet import get_seg_model
+import sys
+import os
+module_path = os.path.join(os.getcwd(), 'Modules') 
+sys.path.append(module_path)
+
+from Hrnet_Sources.Model.seg_hrnet_ocr import get_seg_model
+from Hrnet_Sources.Model.seg_hrnet import get_seg_model
 
 def UNetPP_Efficientb2():
     return smp.UnetPlusPlus(
