@@ -2,6 +2,7 @@
 - HRNet 학습을 위해선 imagenet pretrained model을 다운받아야합니다.
 - 이 [링크](https://1drv.ms/u/s!Aus8VCZ_C_33dKvqI6pBZlifgJk)에서 hrnetv2_w48_imagenet_pretrained.pth 모델을 다운받아 `Modules/Hrnet_Sources/` 아래 두시면 됩니다.
 
+
 ## TODO
 - [x] 베이스라인에 Hrnet 포함
 - [ ] 데이터셋 경로 다시 메인 브랜치대로 바꾸기
