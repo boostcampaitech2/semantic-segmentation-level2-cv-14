@@ -1,0 +1,15 @@
+{
+  "path_dataset_root": "../input/data/",
+  "path_test_json": "../input/data/test.json",
+  "path_checkpoint": "./Projects/UNetPP_Effib4_aug/best_score.pt",
+  "path_save": "./Projects/UNetPP_Effib4_aug/submission.csv",
+  "random_fix": true,
+  "random_seed": 21,
+  "model": "UNetPP_Efficientb4",
+  "model_batch_size": 8,
+  "data_num_workers": 2,
+  "data_loading_mode": "realtime",
+  "data_test_transform": "Default",
+  "data_tta_transform": "HorizontalFlip_Rotate90",
+  "data_target_size": 256
+}
