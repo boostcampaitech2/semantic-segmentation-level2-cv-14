@@ -43,3 +43,15 @@ def HorizontalFlip_Rotate90_CLAHE():
         alb.Normalize(),
         ToTensorV2()
     ])
+
+
+def HorizontalFlip_Rotate90_GridMask():
+    return alb.Compose([
+        alb.HorizontalFlip(p=0.5),
+        alb.RandomRotate90(p=0.5),
+        alb.Normalize(),
+        alb.GridDropout(
+            holes_number_x=5,holes_number_y=5,
+            ratio=0.3, p=1.0),
+        ToTensorV2()
+    ])
