@@ -78,6 +78,6 @@
 
 --------
 
-# HRNet OCR 학습 필요 사항
+## HRNet OCR 학습 필요 사항
 - HRNet OCR 학습을 위해선 imagenet pretrained model을 다운받아야합니다.
 - 이 [링크](https://1drv.ms/u/s!Aus8VCZ_C_33dKvqI6pBZlifgJk)에서 hrnetv2_w48_imagenet_pretrained.pth 모델을 다운받아 `Modules/Hrnet_Sources/` 아래 두어야 합니다. 
