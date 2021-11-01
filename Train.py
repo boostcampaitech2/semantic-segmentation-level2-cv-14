@@ -100,26 +100,26 @@ def Main(args):
     if torch.cuda.device_count() > 1:
         print("Let's use", torch.cuda.device_count(), "GPUs!")
         model = nn.DataParallel(model)
-        args['model_batch_size'] = args['model_batch_size'] * torch.cuda.device_count()
+        args['train_model_batch_size'] = args['train_model_batch_size'] * torch.cuda.device_count()
     model = model.to(device)
 
     # Train, Valid 데이터셋 정의
-    train_dataset = Data.DataSet_Trash(args['path_train_json'], args['path_dataset_root'], loading_mode=args['data_loading_mode'], transforms=getattr(Transforms_Preprocess, args['data_train_transform'])())
-    valid_dataset = Data.DataSet_Trash(args['path_valid_json'], args['path_dataset_root'], loading_mode=args['data_loading_mode'], transforms=getattr(Transforms_Preprocess, args['data_valid_transform'])())
-    train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=args['model_batch_size'], shuffle=True, num_workers=args['data_num_workers'], drop_last=True)
-    valid_loader = torch.utils.data.DataLoader(dataset=valid_dataset, batch_size=args['model_batch_size'], shuffle=False, num_workers=args['data_num_workers'])
+    train_dataset = Data.DataSet_Trash(args['path_json_train'], args['path_dataset_root'], loading_mode=args['train_data_loading_mode'], transforms=getattr(Transforms_Preprocess, args['train_data_transform_preprocess_train'])())
+    valid_dataset = Data.DataSet_Trash(args['path_json_valid'], args['path_dataset_root'], loading_mode=args['train_data_loading_mode'], transforms=getattr(Transforms_Preprocess, args['train_data_transform_preprocess_valid'])())
+    train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=args['train_model_batch_size'], shuffle=True, num_workers=args['train_data_num_workers'], drop_last=True)
+    valid_loader = torch.utils.data.DataLoader(dataset=valid_dataset, batch_size=args['train_model_batch_size'], shuffle=False, num_workers=args['train_data_num_workers'])
 
     # Loss function 정의
-    criterion = getattr(Losses, args['loss'])()
+    criterion = getattr(Losses, args['train_loss'])()
 
     # Optimizer 정의
-    optimizer = getattr(Optimizers, args['optimizer'])(model=model, lr=args['optimizer_learning_rate'], weight_decay=args['optimizer_weight_decay'])
+    optimizer = getattr(Optimizers, args['train_optimizer'])(model=model, lr=args['train_optimizer_learning_rate'], weight_decay=args['train_optimizer_weight_decay'])
 
     # 학습
     n_class = len(train_dataset.Categories())
     best_mIoU = 0
 
-    for epoch in range(1, args['model_num_epochs'] + 1):
+    for epoch in range(1, args['train_model_num_epochs'] + 1):
         for stage in ['train', 'valid']:
             if stage == 'train':
                 model.train()
@@ -132,7 +132,7 @@ def Main(args):
 
             total_loss = 0
             hist = np.zeros((n_class, n_class))
-            for images, masks in tqdm(loader):
+            for images, masks, _ in tqdm(loader):
                 images, masks = images.to(device), masks.long().to(device)
 
                 # inference
@@ -163,7 +163,7 @@ def Main(args):
             avrg_loss = total_loss / len(loader)
             acc, acc_cls, mIoU, fwavacc, IoU = label_accuracy_score(hist)
             IoU_by_class = [{classes: round(IoU, 4)} for IoU, classes in zip(IoU, train_dataset.Categories())]
-            print(f'\n\033[{color}m' + f"[{epoch}/{args['model_num_epochs']}] {stage} # Average Loss: {round(avrg_loss.item(), 4)}, Accuracy : {round(acc, 4)}, mIoU: {round(mIoU, 4)}, IoU by class : {IoU_by_class} " + '\033[0m')
+            print(f'\n\033[{color}m' + f"[{epoch}/{args['train_model_num_epochs']}] {stage} # Average Loss: {round(avrg_loss.item(), 4)}, Accuracy : {round(acc, 4)}, mIoU: {round(mIoU, 4)}, IoU by class : {IoU_by_class} " + '\033[0m')
 
             # log 저장
             with open(os.path.join(project_log_path, stage+".log"), 'a') as f:
@@ -184,34 +184,34 @@ def Main(args):
 if __name__ == '__main__':
     # config file 로드
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', default='./Configs/UNetPP_Efficientb4_aug_train.json', type=str, help="Train.py config.json")
+    parser.add_argument('--config', default='./Configs/UNetPP_Effib4_aug.json', type=str, help="Train.py config.json")
     with open(parser.parse_args().config, 'r') as f:
         args = json.load(f)
 
     # 하드코딩으로 config 값을 수정하고싶다면 아래와 같이 수정할 수 있습니다.
     '''
     args['path_dataset_root'] = '../input/data/'
-    args['path_train_json'] = '../input/data/train.json'
-    args['path_valid_json'] = '../input/data/val.json'
-    args['path_project_root'] = './Projects/UNetPP_Efficientb4_aug2' # 새로 생성될 디렉토리를 지정합니다.
+    args['path_json_train'] = '../input/data/train.json'
+    args['path_json_valid'] = '../input/data/val.json'
+    args['path_project_root'] = './Projects/UNetPP_Effib4_aug_temp' # 새로 생성될 디렉토리를 지정합니다.
 
     args['random_fix'] = True
     args['random_seed'] = 21
 
     args['model'] = 'UNetPP_Efficientb4' # referenced from Modules/Models.py
-    args['model_num_epochs'] = 200
-    args['model_batch_size'] = 8
+    args['train_model_num_epochs'] = 200
+    args['train_model_batch_size'] = 10
 
-    args['loss'] = 'CrossEntropyLoss' # referenced from Modules/Losses.py
+    args['train_loss'] = 'CrossEntropyLoss' # referenced from Modules/Losses.py
 
-    args['optimizer'] = 'Adam' # referenced from Modules/Optimizers.py
-    args['optimizer_learning_rate'] = 0.0001
-    args['optimizer_weight_decay'] = 1e-6
+    args['train_optimizer'] = 'Adam' # referenced from Modules/Optimizers.py
+    args['train_optimizer_learning_rate'] = 0.0001
+    args['train_optimizer_weight_decay'] = 1e-6
 
-    args['data_num_workers'] = 2 # data_loading_mode가 preload 인 경우 작은 값(2정도)을 할당해야 OOM이 발생하지 않습니다.
-    args['data_loading_mode'] = 'realtime' # 'preload' or 'realtime'
-    args['data_train_transform'] = 'HorizontalFlip_Rotate90' # referenced from Modules/Transforms.py
-    args['data_valid_transform'] = 'Default' # referenced from Modules/Transforms.py
+    args['train_data_num_workers'] = 2 # data_loading_mode가 preload 인 경우 작은 값(2정도)을 할당해야 OOM이 발생하지 않습니다.
+    args['train_data_loading_mode'] = 'realtime' # 'preload' or 'realtime'
+    args['train_data_transform_train'] = 'HorizontalFlip_Rotate90' # referenced from Modules/Transforms.py
+    args['train_data_transform_valid'] = 'Default' # referenced from Modules/Transforms.py
     '''
 
     freeze_support()

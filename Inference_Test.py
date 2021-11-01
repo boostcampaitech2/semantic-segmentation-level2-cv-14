@@ -36,13 +36,15 @@
 '''
 
 #Built-in
-from multiprocessing import freeze_support
+from itertools import repeat
+from multiprocessing import freeze_support, Pool
 import argparse
 import json
 
 # External
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
@@ -51,11 +53,9 @@ import ttach as tta
 
 # Custom
 from Modules import Data, Models, Transforms_Preprocess, Transforms_TTA
+from Modules.Transforms_AfterProcess import DCRF_SubRoutine
 from Utils import Tools
 
-
-def collate_fn(batch):
-    return tuple(zip(*batch))
 
 def Main(args):
     # seed 고정
@@ -69,84 +69,96 @@ def Main(args):
     model = getattr(Models, args['model'])()
 
     # Weight 로드
-    checkpoint = torch.load(args['path_checkpoint'], map_location=device)
+    checkpoint = torch.load(args['test_path_checkpoint'], map_location=device)
     model.load_state_dict(checkpoint.state_dict())
 
     # device 할당
     if torch.cuda.device_count() > 1:
         print("Let's use", torch.cuda.device_count(), "GPUs!")
         model = nn.DataParallel(model)
-        args['model_batch_size'] = args['model_batch_size'] * torch.cuda.device_count()
+        args['test_model_batch_size'] = args['test_model_batch_size'] * torch.cuda.device_count()
     model = model.to(device)
 
     # TTA Wrapper 적용
-    model = tta.SegmentationTTAWrapper(model, getattr(Transforms_TTA, args['data_tta_transform'])())
+    model = tta.SegmentationTTAWrapper(model, getattr(Transforms_TTA, args['test_data_transform_tta'])())
 
     # Train, Valid 데이터셋 정의
-    test_dataset = Data.DataSet_Trash(args['path_test_json'], args['path_dataset_root'], loading_mode=args['data_loading_mode'], transforms=getattr(Transforms_Preprocess, args['data_test_transform'])(), stage='test')
-    test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=args['model_batch_size'], shuffle=False, num_workers=args['data_num_workers'], collate_fn=collate_fn)
+    test_dataset = Data.DataSet_Trash(args['path_json_test'], args['path_dataset_root'], loading_mode=args['test_data_loading_mode'], transforms=getattr(Transforms_Preprocess, args['test_data_transform_preprocess'])(), stage='test')
+    test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=args['test_model_batch_size'], shuffle=False, num_workers=args['test_data_num_workers'])
 
-    transform = alb.Compose([alb.Resize(args['data_target_size'], args['data_target_size'])])
-
-    file_name_list = []
-    preds = np.empty((0, args['data_target_size'] ** 2), dtype=np.long)
+    transform = alb.Compose([alb.Resize(args['test_data_target_size'], args['test_data_target_size'])])
 
     model.eval()
     with torch.no_grad():
-        for imgs, image_infos in tqdm(test_loader):
+        image_names = []
+        preds = np.empty((0, args['test_data_target_size'] ** 2), dtype=np.long)
 
-            # inference (512 x 512)
-            outs = model(torch.stack(imgs).to(device))
-            oms = torch.argmax(outs, dim=1).detach().cpu().numpy()
+        for image, image_name, image_origin in tqdm(test_loader):
+            image = image.to(device)
+
+            # 추론
+            output = model(image)
+
+            # Softmax
+            probs = F.softmax(output, dim=1).data.cpu().numpy()
+
+            # Dense CRF 적용
+            if args['test_data_transform_dcrf']:
+                with Pool(args['test_data_transform_dcrf_num_workers']) as pool:
+                    probs = np.array(pool.map(DCRF_SubRoutine, zip(image_origin, probs, repeat(args))))  # pool에 dictionary를 전달하려면 repeat 필요
+
+            # 추론 결과 segmentation 생성
+            output = np.argmax(probs, axis=1)
 
             # resize (256 x 256)
             temp_mask = []
-            for img, mask in zip(np.stack(imgs), oms):
+            for img, mask in zip(np.stack(image.cpu().numpy()), output):
                 transformed = transform(image=img, mask=mask)
                 mask = transformed['mask']
                 temp_mask.append(mask)
 
             oms = np.array(temp_mask)
 
-            oms = oms.reshape([oms.shape[0], args['data_target_size'] ** 2]).astype(int)
+            oms = oms.reshape([oms.shape[0], args['test_data_target_size'] ** 2]).astype(int)
             preds = np.vstack((preds, oms))
 
-            file_name_list.append([i['file_name'] for i in image_infos])
-    file_names = [y for x in file_name_list for y in x]
+            image_names += image_name
 
     # submission.csv 생성
     submission = pd.DataFrame({'image_id': [], 'PredictionString': []})
-    for file_name, string in zip(file_names, preds):
+    for file_name, string in zip(image_names, preds):
         submission = submission.append({"image_id": file_name, "PredictionString": ' '.join(str(e) for e in string.tolist())}, ignore_index=True)
-    submission.to_csv(args['path_save'], index=False)
-
+    submission.to_csv(args['test_path_submission'], index=False)
 
 if __name__ == '__main__':
     # config file 로드
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', default='Configs/UNetPP_Efficientb4_aug_test.json', type=str, help="Train.py config.json")
+    parser.add_argument('--config', default='Configs/UNetPP_Effib4_aug_DiceCE.json', type=str, help="Train.py config.json")
     with open(parser.parse_args().config, 'r') as f:
         args = json.load(f)
 
     # 하드코딩으로 config 값을 수정하고싶다면 아래와 같이 수정할 수 있습니다.
     '''
     args['path_dataset_root'] = '../input/data/'
-    args['path_test_json'] = '../input/data//test.json'
-    args['path_checkpoint'] = './Projects/UNetPP_Efficientb4_aug2/best_score.pt'
-    args['path_save'] = './Projects/UNetPP_Efficientb4_aug2/submission.csv'
+    args['path_json_test'] = '../input/data/test.json'
 
     args['random_fix'] = True
     args["random_seed"] = 21
-
+    
     args['model'] = 'UNetPP_Efficientb4' # referenced from Modules/Models.py
-    args['model_batch_size'] = 8
+    
+    args['test_path_checkpoint'] = './Projects/UNetPP_Effib4_aug2/best_score.pt'
+    args['test_path_submission'] = './Projects/UNetPP_Effib4_aug2/submission.csv'
 
-    args['data_num_workers'] = 2
-    args['data_loading_mode'] = 'realtime'  # 'preload' or 'realtime'
-    args['data_test_transform'] = 'Default' # referenced from Modules/Transform_Train.py
-    args['data_tta_transform'] = 'HorizontalFlip_Rotate90' # referenced from Modules/Transform_TTA.py
-    args['data_target_size'] = 256 # predict size
+    args['test_model_batch_size'] = 8
+    args['test_data_num_workers'] = 2
+    args['test_data_loading_mode'] = 'realtime'  # 'preload' or 'realtime'
+    args['test_data_transform_preprocess'] = 'Default' # referenced from Modules/Transform_Train.py
+    args['test_data_transform_tta'] = 'HorizontalFlip_Rotate90' # referenced from Modules/Transform_TTA.py
+    args['test_data_target_size'] = 256 # predict size
     '''
 
     freeze_support()
     Main(args)
+
+

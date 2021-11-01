@@ -77,10 +77,10 @@ class DataSet_Trash(Dataset):
 
         if self.stage in ["train", 'valid']:
             transformed = self.transforms(image=data["image"], mask=data["mask"])
-            return transformed["image"], transformed["mask"]
+            return transformed["image"], transformed["mask"], data["image"]
         else:
             transformed = self.transforms(image=data["image"])
-            return transformed["image"], data["info"]
+            return transformed["image"], data["info"]['file_name'], data["image"]
 
     '''
     torch.Dataset 클래스의 인터페이스 구현입니다.

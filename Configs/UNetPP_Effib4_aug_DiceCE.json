@@ -1,0 +1,40 @@
+{
+  "path_dataset_root": "../input/data/",
+  "path_json_train": "../input/data/train.json",
+  "path_json_valid": "../input/data/val.json",
+  "path_json_test": "../input/data/test.json",
+  "path_project_root": "./Projects/UNetPP_Effib4_aug_DiceCE",
+
+  "random_fix": true,
+  "random_seed": 21,
+
+  "model": "UNetPP_Efficientb4",
+
+  "train_model_num_epochs": 200,
+  "train_model_batch_size": 10,
+  "train_loss": "DiceCELoss",
+  "train_optimizer": "Adam",
+  "train_optimizer_learning_rate": 0.0001,
+  "train_optimizer_weight_decay": 1e-06,
+  "train_data_num_workers": 2,
+  "train_data_loading_mode": "realtime",
+  "train_data_transform_preprocess_train": "HorizontalFlip_Rotate90",
+  "train_data_transform_preprocess_valid": "Default",
+
+  "test_path_checkpoint": "./Projects/UNetPP_Effib4_aug_DiceCE/best_score.pt",
+  "test_path_submission" : "./Projects/UNetPP_Effib4_aug_DiceCE/submission.csv",
+  "test_model_batch_size": 30,
+  "test_data_num_workers": 4,
+  "test_data_loading_mode": "realtime",
+  "test_data_target_size": 256,
+  "test_data_transform_preprocess": "Default",
+  "test_data_transform_tta": "HorizontalFlip_Rotate90",
+  "test_data_transform_dcrf" : true,
+  "test_data_transform_dcrf_num_workers" : 16,
+  "test_data_transform_dcrf_iter" : 10,
+  "test_data_transform_dcrf_gau_sxy" : 3,
+  "test_data_transform_dcrf_gau_compat" : 3,
+  "test_data_transform_dcrf_bi_sxy" : 49,
+  "test_data_transform_dcrf_bi_srgb" : 5,
+  "test_data_transform_dcrf_bi_compat" : 4
+}
