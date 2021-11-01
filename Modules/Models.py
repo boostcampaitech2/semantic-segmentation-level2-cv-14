@@ -3,6 +3,20 @@
 '''
 import segmentation_models_pytorch as smp
 
+import torch.nn.functional as F
+import torch
+import torch.nn as nn
+
+import sys
+import os
+import yaml
+module_path = os.path.join(os.getcwd(), 'Modules') 
+sys.path.append(module_path)
+
+from Modules.Hrnet_Sources.Model.seg_hrnet_ocr import get_seg_model
+from Modules.Hrnet_Sources.Model.seg_hrnet import get_seg_model
+
+
 def UNetPP_Efficientb2():
     return smp.UnetPlusPlus(
         encoder_name="efficientnet-b2",  # choose encoder, e.g. mobilenet_v2 or efficientnet-b7
