@@ -75,3 +75,9 @@
     - data_test_transform : 테스트에 사용될 전처리 transform을 정의합니다. ('Default'를 추천합니다.)
     - data_tta_transform : TTA에 사용될 transform을 정의합니다.
     - data_target_size : 추론 후 submission을 생성할 때 변환돨 이미지 크기를 정의합니다. (256을 추천합니다.)
+
+--------
+
+# HRNet OCR 학습 필요 사항
+- HRNet OCR 학습을 위해선 imagenet pretrained model을 다운받아야합니다.
+- 이 [링크](https://1drv.ms/u/s!Aus8VCZ_C_33dKvqI6pBZlifgJk)에서 hrnetv2_w48_imagenet_pretrained.pth 모델을 다운받아 `Modules/Hrnet_Sources/` 아래 두어야 합니다. 
