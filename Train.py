@@ -184,7 +184,7 @@ def Main(args):
 if __name__ == '__main__':
     # config file 로드
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', default='./Configs/UNetPP_Effib4_aug.json', type=str, help="Train.py config.json")
+    parser.add_argument('--config', default='./Configs/PAN_ResNext101.json', type=str, help="Train.py config.json")
     with open(parser.parse_args().config, 'r') as f:
         args = json.load(f)
 

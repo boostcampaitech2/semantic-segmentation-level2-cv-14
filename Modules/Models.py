@@ -41,6 +41,14 @@ def DeepLabV3P_Efficientb4():
         classes=11,  # model output channels (number of classes in your dataset)
     )
 
+def PAN_ResNext101():
+    return smp.PAN(
+        encoder_name="se_resnext101_32x4d", # choose encoder, e.g. mobilenet_v2 or efficientnet-b7
+        encoder_weights=None,
+        in_channels=3,                  # model input channels (1 for gray-scale images, 3 for RGB, etc.)
+        classes=11,                     # model output channels (number of classes in your dataset)
+    )
+
 class Hrnet_Seg_Ocr_Model(nn.Module):
     def __init__(self):
         super().__init__()

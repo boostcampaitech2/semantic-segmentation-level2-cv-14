@@ -80,7 +80,7 @@ class DataSet_Trash(Dataset):
             return transformed["image"], transformed["mask"], data["image"]
         else:
             transformed = self.transforms(image=data["image"])
-            return transformed["image"], data["info"]['file_name'], data["image"]
+            return transformed["image"], data["info"]['file_name'], data["image"], data["info"]["id"]
 
     '''
     torch.Dataset 클래스의 인터페이스 구현입니다.

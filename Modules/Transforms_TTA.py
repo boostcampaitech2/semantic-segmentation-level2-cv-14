@@ -30,7 +30,7 @@ def HorizontalFlip_Rotate90_MultiScale():
         [
             tta.HorizontalFlip(),
             tta.Rotate90(angles=[0, 180]),
-            tta.Scale(scales=[1, 2, 4]),
+            tta.Scale(scales=[1, 0.5, 2]),
         ]
     )
 

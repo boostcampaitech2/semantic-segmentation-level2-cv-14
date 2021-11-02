@@ -26,6 +26,15 @@ def HorizontalFlip_Rotate90():
         ToTensorV2()
     ])
 
+def HorizontalFlip_Rotate90_RandomResizedCrop():
+    return alb.Compose([
+        alb.HorizontalFlip(p=0.5),
+        alb.RandomRotate90(p=0.5),
+        alb.RandomResizedCrop(height=512,width=512, scale=[0.5, 1], p=0.5),
+        alb.Normalize(),
+        ToTensorV2()
+    ])
+
 def HorizontalFlip_Rotate90_Elastic():
     return alb.Compose([
         alb.HorizontalFlip(p=0.5),

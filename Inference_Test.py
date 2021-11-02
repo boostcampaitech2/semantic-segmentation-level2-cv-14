@@ -40,6 +40,7 @@ from itertools import repeat
 from multiprocessing import freeze_support, Pool
 import argparse
 import json
+import re
 
 # External
 import torch
@@ -50,6 +51,8 @@ import pandas as pd
 from tqdm import tqdm
 import albumentations as alb
 import ttach as tta
+from pycocotools import mask as coco_mask
+from skimage import measure
 
 # Custom
 from Modules import Data, Models, Transforms_Preprocess, Transforms_TTA
@@ -88,12 +91,13 @@ def Main(args):
 
     transform = alb.Compose([alb.Resize(args['test_data_target_size'], args['test_data_target_size'])])
 
+
     model.eval()
     with torch.no_grad():
         image_names = []
         preds = np.empty((0, args['test_data_target_size'] ** 2), dtype=np.long)
 
-        for image, image_name, image_origin in tqdm(test_loader):
+        for image, image_name, image_origin, image_id in tqdm(test_loader):
             image = image.to(device)
 
             # 추론
@@ -124,16 +128,70 @@ def Main(args):
 
             image_names += image_name
 
+            # 슈도 레이블링
+            if args["test_pseudo_labeling"]:
+                if 'annotations' not in locals():
+                    annotations = []
+
+                for batch, id in zip(probs, image_id):
+                    mask = np.zeros_like(batch, dtype=np.uint8)
+                    mask[np.where(batch == np.max(batch, axis=0))] = 1
+
+                    for idx, mask_cls in enumerate(mask):
+                        if idx == 0: # 배경 무시
+                            continue
+                        
+                        fortran_ground_truth_binary_mask = np.asfortranarray(mask_cls)
+                        encoded_ground_truth = coco_mask.encode(fortran_ground_truth_binary_mask)
+                        ground_truth_area = int(coco_mask.area(encoded_ground_truth))
+                        ground_truth_bounding_box = list(coco_mask.toBbox(encoded_ground_truth))
+                        contours = measure.find_contours(mask_cls, 0.5)
+
+                        segmentation = []
+                        for object in contours:
+                            object = np.flip(object, axis=1).astype(int)
+                            points = object.ravel().tolist()
+                            segmentation.append(points)
+
+                        if not segmentation or ground_truth_area < args["test_pseudo_labeling_threshold_area"]:
+                            continue
+
+                        annotation = {"image_id":id.item(), "category_id":idx, "segmentation":segmentation, "area":ground_truth_area, "bbox":ground_truth_bounding_box, "iscrowd":0}
+                        annotations.append(annotation)
+
     # submission.csv 생성
     submission = pd.DataFrame({'image_id': [], 'PredictionString': []})
     for file_name, string in zip(image_names, preds):
         submission = submission.append({"image_id": file_name, "PredictionString": ' '.join(str(e) for e in string.tolist())}, ignore_index=True)
     submission.to_csv(args['test_path_submission'], index=False)
 
+    # 슈도 레이블링
+    if args["test_pseudo_labeling"]:
+        with open(args["path_json_test"], 'r') as f:
+            js_test = json.load(f)
+
+        with open(args["path_json_train"], 'r') as f:
+            js_train = json.load(f)
+
+        idx_image = len(js_train["images"])
+        for idx, image in enumerate(js_test["images"]):
+            image["id"] += idx_image
+            js_train["images"].append(image)
+
+        idx_ann = len(js_train["annotations"])
+        for idx, ann in enumerate(annotations):
+            ann["image_id"] += idx_image
+            ann["id"] = idx + idx_ann
+            js_train["annotations"].append(ann)
+
+        with open(args["test_pseudo_labeling_output_path"], 'w') as f:
+            jdata = json.dump(js_train,f, indent=1)
+
+
 if __name__ == '__main__':
     # config file 로드
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', default='Configs/UNetPP_Effib4_aug_DiceCE.json', type=str, help="Train.py config.json")
+    parser.add_argument('--config', default='Configs/UNetPP_Effib4_aug_DiceCE_AdamW.json', type=str, help="Train.py config.json")
     with open(parser.parse_args().config, 'r') as f:
         args = json.load(f)
 
