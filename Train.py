@@ -96,6 +96,12 @@ def Main(args):
     # 모델 정의
     model = getattr(Models, args['model'])()
 
+    # Weight 로드
+    if args['train_model_pretrained']:
+        checkpoint = torch.load(args['train_model_pretrained_path'], map_location=device)
+        model.load_state_dict(checkpoint.state_dict())
+        print("pretrained model load : ", args['train_model_pretrained_path'])
+
     # device 할당
     if torch.cuda.device_count() > 1:
         print("Let's use", torch.cuda.device_count(), "GPUs!")
@@ -184,7 +190,7 @@ def Main(args):
 if __name__ == '__main__':
     # config file 로드
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', default='./Configs/PAN_ResNext101.json', type=str, help="Train.py config.json")
+    parser.add_argument('--config', default='./Configs/UNetPP_Effib4_aug_DiceCE.json', type=str, help="Train.py config.json")
     with open(parser.parse_args().config, 'r') as f:
         args = json.load(f)
 

@@ -10,6 +10,8 @@
 
   "model": "UNetPP_Efficientb4",
 
+  "train_model_pretrained" : true,
+  "train_model_pretrained_path" : "./Projects/UNetPP_Effib4_aug_DiceCE_AdamW/best_score_695.pt",
   "train_model_num_epochs": 200,
   "train_model_batch_size": 10,
   "train_loss": "DiceCELoss",
