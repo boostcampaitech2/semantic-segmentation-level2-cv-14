@@ -3,15 +3,15 @@
   "path_json_train": "../input/data/train.json",
   "path_json_valid": "../input/data/val.json",
   "path_json_test": "../input/data/test.json",
-  "path_project_root": "./Projects/UNetPP_Effib4_aug",
+  "path_project_root": "./Projects/PAN_ResNext101",
 
   "random_fix": true,
   "random_seed": 21,
 
-  "model": "UNetPP_Efficientb4",
+  "model": "PAN_ResNext101",
 
   "train_model_num_epochs": 200,
-  "train_model_batch_size": 10,
+  "train_model_batch_size": 14,
   "train_loss": "CrossEntropyLoss",
   "train_optimizer": "Adam",
   "train_optimizer_learning_rate": 0.0001,
@@ -21,8 +21,8 @@
   "train_data_transform_preprocess_train": "HorizontalFlip_Rotate90",
   "train_data_transform_preprocess_valid": "Default",
 
-  "test_path_checkpoint": "./Projects/UNetPP_Effib4_aug/best_score.pt",
-  "test_path_submission" : "./Projects/UNetPP_Effib4_aug/submission.csv",
+  "test_path_checkpoint": "./Projects/PAN_ResNext101/best_score.pt",
+  "test_path_submission" : "./Projects/PAN_ResNext101/submission.csv",
   "test_model_batch_size": 30,
   "test_data_num_workers": 4,
   "test_data_loading_mode": "realtime",
