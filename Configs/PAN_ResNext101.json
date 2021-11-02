@@ -10,6 +10,8 @@
 
   "model": "PAN_ResNext101",
 
+  "train_model_pretrained" : false,
+  "train_model_pretrained_path" : "",
   "train_model_num_epochs": 200,
   "train_model_batch_size": 14,
   "train_loss": "CrossEntropyLoss",
@@ -38,7 +40,7 @@
   "test_data_transform_dcrf_bi_srgb" : 5,
   "test_data_transform_dcrf_bi_compat" : 4,
 
-  "test_pseudo_labeling" : true,
+  "test_pseudo_labeling" : false,
   "test_pseudo_labeling_threshold_area" : 3500,
   "test_pseudo_labeling_output_path" : "../input/data/train_pseudo.json"
 }
