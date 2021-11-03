@@ -53,6 +53,7 @@ import albumentations as alb
 import ttach as tta
 from pycocotools import mask as coco_mask
 from skimage import measure
+import cv2
 
 # Custom
 from Modules import Data, Models, Transforms_Preprocess, Transforms_TTA
@@ -135,12 +136,12 @@ def Main(args):
 
                 for batch, id in zip(probs, image_id):
                     mask = np.zeros_like(batch, dtype=np.uint8)
-                    mask[np.where(batch == np.max(batch, axis=0))] = 1
-
+                    mask[np.where(batch == np.max(batch, axis=0))] = 255
+                    mask = np.pad(mask, ((0, 0), (1, 1), (1, 1)), 'constant')
                     for idx, mask_cls in enumerate(mask):
                         if idx == 0: # 배경 무시
                             continue
-                        
+
                         fortran_ground_truth_binary_mask = np.asfortranarray(mask_cls)
                         encoded_ground_truth = coco_mask.encode(fortran_ground_truth_binary_mask)
                         ground_truth_area = int(coco_mask.area(encoded_ground_truth))
@@ -191,7 +192,7 @@ def Main(args):
 if __name__ == '__main__':
     # config file 로드
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', default='Configs/UNetPP_Effib4_aug_DiceCE_AdamW.json', type=str, help="Train.py config.json")
+    parser.add_argument('--config', default='Configs/UNetPP_Effib4_DiceCE_AdamW.json', type=str, help="Train.py config.json")
     with open(parser.parse_args().config, 'r') as f:
         args = json.load(f)
 
