@@ -1,6 +1,6 @@
 {
   "path_dataset_root": "../input/data/",
-  "path_json_train": "../input/data/train.json",
+  "path_json_train": "../input/data/train_pseudo.json",
   "path_json_valid": "../input/data/val.json",
   "path_json_test": "../input/data/test.json",
   "path_project_root": "./Projects/PAN_ResNext101_pseudo",

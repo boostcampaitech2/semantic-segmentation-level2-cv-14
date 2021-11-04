@@ -39,7 +39,17 @@ def HorizontalFlip_Rotate90_MultiScale_Multiply():
         [
             tta.HorizontalFlip(),
             tta.Rotate90(angles=[0, 180]),
-            tta.Scale(scales=[1, 2, 4]),
+            tta.Scale(scales=[1, 0.5, 2]),
             tta.Multiply(factors=[0.9, 1, 1.1]),
+        ]
+    )
+
+def HorizontalFlip_Rotate90_MultiScale_Multiply2():
+    return tta.Compose(
+        [
+            tta.HorizontalFlip(),
+            tta.Rotate90(angles=[0, 180]),
+            tta.Scale(scales=[1, 0.5, 2]),
+            tta.Multiply(factors=[0.89, 1, 1.11]),
         ]
     )

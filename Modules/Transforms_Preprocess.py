@@ -4,6 +4,10 @@
 
 import albumentations as alb
 from albumentations.pytorch import ToTensorV2
+import cv2
+
+def NoTransform():
+    return alb.Compose([])
 
 def Default():
     return alb.Compose([
@@ -63,4 +67,10 @@ def HorizontalFlip_Rotate90_GridMask():
             holes_number_x=5,holes_number_y=5,
             ratio=0.3, p=1.0),
         ToTensorV2()
+    ])
+
+def ObjectAugmentation():
+    return alb.Compose([
+        alb.ShiftScaleRotate((-0.5,0.5),(-0.5,0.5),(-45,45), border_mode=cv2.BORDER_CONSTANT),
+        alb.HorizontalFlip(p=0.5)
     ])

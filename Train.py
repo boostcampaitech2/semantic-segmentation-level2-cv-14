@@ -110,8 +110,8 @@ def Main(args):
     model = model.to(device)
 
     # Train, Valid 데이터셋 정의
-    train_dataset = Data.DataSet_Trash(args['path_json_train'], args['path_dataset_root'], loading_mode=args['train_data_loading_mode'], transforms=getattr(Transforms_Preprocess, args['train_data_transform_preprocess_train'])())
-    valid_dataset = Data.DataSet_Trash(args['path_json_valid'], args['path_dataset_root'], loading_mode=args['train_data_loading_mode'], transforms=getattr(Transforms_Preprocess, args['train_data_transform_preprocess_valid'])())
+    train_dataset = Data.DataSet_Trash(args['path_json_train'], args['path_dataset_root'], stage='train', loading_mode=args['train_data_loading_mode'], transforms=getattr(Transforms_Preprocess, args['train_data_transform_preprocess_train'])(), object_aug=args['train_data_transform_preprocess_train_object_aug'])
+    valid_dataset = Data.DataSet_Trash(args['path_json_valid'], args['path_dataset_root'], stage='valid', loading_mode=args['train_data_loading_mode'], transforms=getattr(Transforms_Preprocess, args['train_data_transform_preprocess_valid'])())
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=args['train_model_batch_size'], shuffle=True, num_workers=args['train_data_num_workers'], drop_last=True)
     valid_loader = torch.utils.data.DataLoader(dataset=valid_dataset, batch_size=args['train_model_batch_size'], shuffle=False, num_workers=args['train_data_num_workers'])
 
@@ -190,7 +190,7 @@ def Main(args):
 if __name__ == '__main__':
     # config file 로드
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', default='./Configs/UNetPP_Effib4_DiceCE_AdamW_pseudo.json', type=str, help="Train.py config.json")
+    parser.add_argument('--config', default='./Configs/UNetPP_Effib4_DiceCE_AdamW_ObMix_pseudo.json', type=str, help="Train.py config.json")
     with open(parser.parse_args().config, 'r') as f:
         args = json.load(f)
 
