@@ -35,6 +35,9 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 |Hrnet_Ocr_aug|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug.json)|
 |Hrnet_Ocr_aug_gridmask|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_gridmask.json)|
 |Hrnet_Ocr_aug_pseudo|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_pseudo.json)|
+|Hrnet_Ocr_aug_gridmask_pseudo|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_gridmask_pseudo.json)|
+|Hrnet_Ocr_aug_gridmask_CLAHE_pseudo|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_gridmask_CLAHE_pseudo.json)|
+|Hrnet_Ocr_aug_gridmask_CLAHE_pseudo_objectMix|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_gridmask_CLAHE_pseudo_objectMix.json)|
 |PAN_ResNext101|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/PAN_ResNext101.json)|
 |PAN_ResNext101_pseudo|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/PAN_ResNext101_pseudo.json)|
 |UNetPP_Effib3_DiceCE_AdamW|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib3_DiceCE_AdamW.json)|
