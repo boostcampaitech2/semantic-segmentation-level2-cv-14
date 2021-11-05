@@ -54,7 +54,15 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 |UNetPP_Effib4_aug_DiceCE|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_DiceCE.json)|
 |UNetPP_Effib4_aug_DiceCE_AdamW|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_DiceCE_AdamW.json)|
 
-## Code Description
+## Installation
+
+#### Sementation Models Pytorch [ref](https://github.com/qubvel/segmentation_models.pytorch) 
+`pip install -U git+https://github.com/qubvel/segmentation_models.pytorch`
+
+#### PyDenseCRF [ref](https://github.com/lucasb-eyer/pydensecrf#installation)
+`pip install git+https://github.com/lucasb-eyer/pydensecrf.git`
+
+## Code Description 
 
 ##### Train.py
  - Semantic Segmentation Model 을 학습합니다.
