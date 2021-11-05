@@ -58,7 +58,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
  - config.json 파일을 통해 학습 인자를 제어할 수 있습니다.
 
  - 사용법
-   - python Train.py --config Configs/UNetPP_Efficientb4_aug_train.json
+   - python Train.py --config Configs/UNetPP_Effib4_DiceCE_AdamW_ObMix.json
 
  - 출력
    - 'path_project_root' 값으로 지정한 경로에 다음과 같은 파일이 생성됩니다.
@@ -75,7 +75,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
     - TTA와 Dense CRF등의 후처리를 적용할 수 있습니다.
 
  - 사용법
-   - python Inference_Test.py --config Configs/UNetPP_Efficientb4_aug_test.json
+   - python Inference_Test.py --config Configs/UNetPP_Effib4_DiceCE_AdamW_ObMix.json
 
  - 출력
    - 'path_save' 값으로 지정한 경로에 다음과 같은 파일이 생성됩니다.
@@ -87,7 +87,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
    - TTA와 Dense CRF등의 후처리를 적용할 수 있습니다.
 
  - 사용법
-   - python Inference_Valid.py --config Configs/UNetPP_Efficientb4_aug_test.json
+   - python Inference_Valid.py --config Configs/UNetPP_Effib4_DiceCE_AdamW_ObMix.json
 
  - 출력
    - Validation 데이터로 추론했을때의 모델의 성능을 출력합니다.
