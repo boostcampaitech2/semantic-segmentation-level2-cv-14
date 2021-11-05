@@ -100,17 +100,29 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 <details>
  <summary> 파일 명세 </summary>
     - Train.py : 학습을 위한 기능이 정의되어 있습니다. 이 파일을 사용해 Semantic Segmentation 모델을 학습할 수 있습니다.
+
     - Inference_Valid.py : Validation 데이터를 사용해 TTA, Dence CRF등을 실험하기 위한 기능이 정의되어 있습니다. 이 파일을 사용해 Validation 데이터에서 후처리 실험을 할 수 있습니다.
+    
     - Inference_Test.py : Test 데이터를 사용해 Submission 파일을 생성하는 기능이 정의되어 있습니다. 이 파일을 사용해 TTA, Dence CRF 등의 후처리를 적용하고, 그 결과로 Submission 파일을 생성할 수 있습니다.
+
     - Modules/Data.py : Custom Dataset 클래스가 정의되어 있습니다. (현재는 부스트캠프 컴피티션용 COCO format만 지원합니다.)
+
     - Modules/Models.py : Semantic Segmentation 모델들이 정의되어 있습니다.
+
     - Modules/Losses.py : 학습에 사용될 Loss들이 정의되어있습니다.
+
     - Modules/Optimizer.py : 학습에 사용될 Optimizer들이 정의되어 있습니다.
+
     - Modules/Transform_Preprocess.py : 이미지 전처리를 위한 Transform들이 정의되어 있습니다.
+
     - Modules/Transform_TTA.py : TTA를 위한 Transform 들이 정의되어 있습니다.
+
     - Modules/Transform_AfterProcess.py : TTA를 위한 Transform 들이 정의되어 있습니다.
+
     - Utils/Tools.py : 각종 편의기능들이 정의되어 있습니다.
+
     - Utils/utils.py : Semantic Segmentation score 계산을 위한 도구들이 정의되어 있습니다.
+    
 </details>
 <details>
  <summary> config 요소 명세 </summary>
