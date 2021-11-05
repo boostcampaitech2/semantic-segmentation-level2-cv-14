@@ -92,7 +92,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
  - 출력
    - Validation 데이터로 추론했을때의 모델의 성능을 출력합니다.
 
-<details>
+<details open>
  <summary> 파일 명세 </summary>
     - Train.py : 학습을 위한 기능이 정의되어 있습니다. 이 파일을 사용해 Semantic Segmentation 모델을 학습할 수 있습니다.
 
@@ -117,9 +117,8 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
     - Utils/Tools.py : 각종 편의기능들이 정의되어 있습니다.
 
     - Utils/utils.py : Semantic Segmentation score 계산을 위한 도구들이 정의되어 있습니다.
-
 </details>
-<details>
+<details open>
  <summary> config 요소 명세 </summary>
     - "path_dataset_root" : 데이터셋이 저장된 root를 정의합니다.
     - "path_json_train" : train 데이터 json 파일을 정의합니다.
@@ -166,7 +165,6 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
     - "test_pseudo_labeling" : pseudo labeling 적용 유무를 정의합니다.
     - "test_pseudo_labeling_threshold_area" : pseudo labeling 이후 추론된 객체가 이 threshold 이하일 경우 제외합니다.
     - "test_pseudo_labeling_output_path" : pseudo labeling 결과로 저장될 coco format의 json파일 경로를 정의합니다.
-
 </details>
 
 
