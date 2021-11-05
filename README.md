@@ -61,13 +61,13 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
    - python Train.py --config Configs/UNetPP_Efficientb4_aug_train.json
 
  - 출력
-    'path_project_root' 값으로 지정한 경로에 다음과 같은 파일이 생성됩니다.
-        best_score.pt : 모델이 가장 높은 validation score를 기록했던 시점의 weight 파일입니다.
-        logs/
-            best_score.log : 모델이 가장 높은 validation score를 갱신했던 시점의 epoch와 점수를 기록한 파일입니다.
-            config.json : 모델 학습에 사용됐던 config.json 파일 사본입니다.
-            train.log : 학습 출력 기록입니다.
-            valid.log : 검증 출력 기록입니다.
+   - 'path_project_root' 값으로 지정한 경로에 다음과 같은 파일이 생성됩니다.
+      - best_score.pt : 모델이 가장 높은 validation score를 기록했던 시점의 weight 파일입니다.
+      - logs/
+         - best_score.log : 모델이 가장 높은 validation score를 갱신했던 시점의 epoch와 점수를 기록한 파일입니다.
+         - config.json : 모델 학습에 사용됐던 config.json 파일 사본입니다.
+         - train.log : 학습 출력 기록입니다.
+         - valid.log : 검증 출력 기록입니다.
 
 ##### Inference_Test.py
  - Semantic Segmentation Model 을 Inference 해서 submission.csv 파일을 생성합니다.
@@ -78,8 +78,8 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
    - python Inference_Test.py --config Configs/UNetPP_Efficientb4_aug_test.json
 
  - 출력
-    'path_save' 값으로 지정한 경로에 다음과 같은 파일이 생성됩니다.
-        submission.csv : 부스트캠프 컴피티션 형식에 맞추어 생성된 Segmentation 결과 파일입니다.
+   - 'path_save' 값으로 지정한 경로에 다음과 같은 파일이 생성됩니다.
+      - submission.csv : 부스트캠프 컴피티션 형식에 맞추어 생성된 Segmentation 결과 파일입니다.
 
 ##### Inference_Valid.py
  - pSemantic Segmentation Model 을 Inference 해서 Validation 데이터를 통해 모델의 성능을 확인합니다.
@@ -90,7 +90,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
    - python Inference_Valid.py --config Configs/UNetPP_Efficientb4_aug_test.json
 
  - 출력
-    Validation 데이터로 추론했을때의 모델의 성능을 출력합니다.
+   - Validation 데이터로 추론했을때의 모델의 성능을 출력합니다.
 
 <details>
  <summary> 파일 명세 </summary>
