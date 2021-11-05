@@ -163,9 +163,9 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
     - "test_data_transform_dcrf_bi_srgb" : Dense CRF 연산의 Bilateral srgb 값을 정의합니다.
     - "test_data_transform_dcrf_bi_compat" : Dense CRF 연산의 Bilateral compat 값을 정의합니다.
 
-    - "test_pseudo_labeling" : false,
-    - "test_pseudo_labeling_threshold_area" : 3500,
-    - "test_pseudo_labeling_output_path" : "../input/data/train_pseudo.json"
+    - "test_pseudo_labeling" : pseudo labeling 적용 유무를 정의합니다.
+    - "test_pseudo_labeling_threshold_area" : pseudo labeling 이후 추론된 객체가 이 threshold 이하일 경우 제외합니다.
+    - "test_pseudo_labeling_output_path" : pseudo labeling 결과로 저장될 coco format의 json파일 경로를 정의합니다.
 
 </details>
 
