@@ -180,7 +180,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 
 ### 실험 결과 도식화
 
-다음 [링크](https://www.edrawmind.com/online/map.html?sharecode=6184ef514b5544a49698555)는 실험 목록을 마인드맵 형식으로 도식화한 것다.
+다음 [링크](https://www.edrawmind.com/online/map.html?sharecode=6184ef514b5544a49698555)는 실험 목록을 마인드맵 형식으로 도식화한 것입니다.
 ![Segmentation31-web-16349014493121112222112](https://user-images.githubusercontent.com/44287798/140483293-89c769c7-37fb-4b21-85b3-d14e3e882c57.png)
 
 
