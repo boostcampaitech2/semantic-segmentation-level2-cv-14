@@ -150,3 +150,14 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 ### HRNet OCR 학습 필요 사항
 - HRNet OCR 학습을 위해선 imagenet pretrained model을 다운받아야합니다.
 - 이 [링크](https://1drv.ms/u/s!Aus8VCZ_C_33dKvqI6pBZlifgJk)에서 hrnetv2_w48_imagenet_pretrained.pth 모델을 다운받아 `Modules/Hrnet_Sources/` 아래 두어야 합니다. 
+
+
+
+----
+
+### 실험 결과 도식화
+
+다음 [링크](https://www.edrawmind.com/online/map.html?sharecode=6184ef514b5544a49698555)는 실험 목록을 마인드맵 형식으로 도식화한 것이다.
+![Segmentation31-web-16349014493121112222112](https://user-images.githubusercontent.com/44287798/140483293-89c769c7-37fb-4b21-85b3-d14e3e882c57.png)
+
+
