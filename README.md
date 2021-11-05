@@ -94,11 +94,10 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
    - python Inference_Test.py --config Configs/UNetPP_Effib4_DiceCE_AdamW_ObMix.json
 
  - 출력
-   - 'path_save' 값으로 지정한 경로에 다음과 같은 파일이 생성됩니다.
-      - submission.csv : 부스트캠프 컴피티션 형식에 맞추어 생성된 Segmentation 결과 파일입니다.
+    - submission.csv : 부스트캠프 컴피티션 형식에 맞추어 생성된 Segmentation 결과 파일입니다.
 
 ##### Inference_Valid.py
- - pSemantic Segmentation Model 을 Inference 해서 Validation 데이터를 통해 모델의 성능을 확인합니다.
+ - Semantic Segmentation Model 을 Inference 해서 Validation 데이터를 통해 모델의 성능을 확인합니다.
  - config.json 파일을 통해 추론 인자를 제어할 수 있습니다.
    - TTA와 Dense CRF등의 후처리를 적용할 수 있습니다.
 
@@ -179,7 +178,6 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
     - "test_data_transform_dcrf_bi_sxy" : Dense CRF 연산의 Bilateral sxy 값을 정의합니다.
     - "test_data_transform_dcrf_bi_srgb" : Dense CRF 연산의 Bilateral srgb 값을 정의합니다.
     - "test_data_transform_dcrf_bi_compat" : Dense CRF 연산의 Bilateral compat 값을 정의합니다.
-
     - "test_pseudo_labeling" : pseudo labeling 적용 유무를 정의합니다.
     - "test_pseudo_labeling_threshold_area" : pseudo labeling 이후 추론된 객체가 이 threshold 이하일 경우 제외합니다.
     - "test_pseudo_labeling_output_path" : pseudo labeling 결과로 저장될 coco format의 json파일 경로를 정의합니다.

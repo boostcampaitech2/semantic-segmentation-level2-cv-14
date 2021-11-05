@@ -1,10 +1,10 @@
 '''
 이 코드는 다음 기능을 포함합니다.
- - pytorch 기반의 Semantic Segmentation Model 을 학습합니다.
+ - Semantic Segmentation Model 을 학습합니다.
  - config.json 파일을 통해 학습 인자를 제어할 수 있습니다.
 
  - 사용법
-    Train.py --config Configs/UNetPP_Efficientb4_aug_train.json
+    python Train.py --config Configs/UNetPP_Effib4_DiceCE_AdamW_ObMix.json
 
  - 출력
     'path_project_root' 값으로 지정한 경로에 다음과 같은 파일이 생성됩니다.
@@ -25,27 +25,30 @@
     - Utils/utils.py : Semantic Segmentation score 계산을 위한 도구들이 정의되어 있습니다.
 
  - 기본 config_train.json 요소 명세
-    - path_dataset_root : 데이터셋이 저장된 root를 정의합니다.
-    - path_train_json : train 데이터 json 파일을 정의합니다.
-    - path_valid_json : test 데이터 json 파일을 정의합니다.
-    - path_project_root : 학습될 모델이 저장될 디렉토리를 정의합니다.
-    - random_fix : 난수 고정 여부를 정의합니다.
-    - random_seed : 고정할 seed를 정의합니다.
-    - model : Semantic Segmentation 모델을 정의합니다.
-    - model_num_epochs : 학습 epoch 수를 정의합니다.
-    - model_batch_size : 모델의 배치 크기를 정의합니다.
-    - loss : 학습에 사용할 loss를 정의합니다.
-    - optimizer : 학습에 사용할 optimizer를 정의합니다.
-    - optimizer_learning_rate : 학습에 사용할 learning rate를 정의합니다.
-    - optimizer_weight_decay : 학습에 사용할 weight decay를 정의합니다.
-    - data_num_workers : data loader 가 사용할 프로세스 수를 정의합니다.
-    - data_loading_mode : 데이터를 미리 로드하거나, 실시간으로 로드하는 모드를 정의합니다. 'preload' 또는 'realtime' 으로 선택할 수 있습니다.
-    - data_train_transform : 학습에 사용될 전처리 transform을 정의합니다.
-    - data_valid_transform : 검증에 사용될 전처리 transform을 정의합니다. ('Default'를 추천합니다.)
+    - "path_dataset_root" : 데이터셋이 저장된 root를 정의합니다.
+    - "path_json_train" : train 데이터 json 파일을 정의합니다.
+    - "path_project_root" : 학습될 모델이 저장될 디렉토리를 정의합니다.
+    - "random_fix": true, : 난수 고정 여부를 정의합니다.
+    - "random_seed": 21, : 고정할 seed를 정의합니다.
+    - "model" : Semantic Segmentation 모델을 정의합니다.
+    - "train_model_pretrained" : 사전학습된 모델을 사용할것인지 여부를 정의합니다.
+    - "train_model_pretrained_path" : 사전학습된 모델의 경로를 정의합니다.
+    - "train_model_num_epochs" : 학습 epoch 수를 정의합니다.
+    - "train_model_batch_size" : 학습시의 모델의 배치 크기를 정의합니다.
+    - "train_loss": "DiceCELoss", : 학습에 사용할 loss를 정의합니다.
+    - "train_optimizer" : 학습에 사용할 optimizer를 정의합니다.
+    - "train_optimizer_learning_rate" : 학습에 사용할 learning rate를 정의합니다.
+    - "train_optimizer_weight_decay" : 학습에 사용할 weight decay를 정의합니다.
+    - "train_data_num_workers" : data loader 가 사용할 프로세스 수를 정의합니다.
+    - "train_data_loading_mode" : 데이터를 미리 로드하거나, 실시간으로 로드하는 모드를 정의합니다. 'preload' 또는 'realtime' 으로 선택할 수 있습니다.
+    - "train_data_transform_preprocess_train" : 학습에 사용될 전처리 transform을 정의합니다.
+    - "train_data_transform_preprocess_train_object_aug" : Object Mix Augmentation 적용 여부를 정의합니다.
+    - "train_data_transform_preprocess_valid" : 검증에 사용될 전처리 transform을 정의합니다. ('Default'를 추천합니다.)
 
 
 작성자 JiSeong Kim
 최초 작성일 2021-10-28
+최종 작성일 2021-11-06
 '''
 
 # Build-in
