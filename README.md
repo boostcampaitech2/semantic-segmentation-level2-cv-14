@@ -99,13 +99,14 @@ config file은 hyperparameter, model architecture, optimizer, scheduler, train/t
 
 <details>
  <summary> 이 코드는 다음 기능을 포함합니다. </summary>
-  - pytorch 기반의 Semantic Segmentation Model 을 Inference 해서 submission.csv 파일을 생성합니다.
-  - config.json 파일을 통해 추론 인자를 제어할 수 있습니다.
+ 
+ - pytorch 기반의 Semantic Segmentation Model 을 Inference 해서 submission.csv 파일을 생성합니다.
+ - config.json 파일을 통해 추론 인자를 제어할 수 있습니다.
 
-  - 사용법
+ - 사용법
     Inference_Test.py --config Configs/UNetPP_Efficientb4_aug_test.json
 
-  - 출력
+ - 출력
     'path_save' 값으로 지정한 경로에 다음과 같은 파일이 생성됩니다.
         submission.csv : 부스트캠프 컴피티션 형식에 맞추어 생성된 Segmentation 결과 파일입니다.
 </details>
