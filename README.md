@@ -1,4 +1,48 @@
-# Train
+# 재활용 쓰레기 Semantic Segmentation
+
+<img src="https://user-images.githubusercontent.com/44287798/140460761-980406ed-0ba3-4634-a3ee-585670c07052.JPG" width="500"> 
+
+## 프로젝트 개요
+
+우리는 많은 물건이 대량으로 생산되고, 소비되는 시대를 살고 있고 이러한 문화는 '쓰레기 대란', '매립지 부족'과 같은 여러 사회 문제를 낳고 있다.
+ 분리수거는 이러한 환경 부담을 줄일 수 있는 방법 중 하나로, 잘 분리배출 된 쓰레기는 자원으로서 가치를 인정받아 재활용되지만, 잘못 분리배출 되면 그대로 폐기물로 분류되어 매립 또는 소각되기 때문이다.
+ 
+우리는 사진에서 쓰레기를 탐지하는 모델을 만들어 이러한 문제점을 해결해보고자 한다. 문제 해결을 위한 데이터셋으로는 일반 쓰레기, 플라스틱, 종이, 유리 등 10 종류의 쓰레기가 찍힌 사진 데이터셋을 사용한다. 우수한 성능의 모델은 쓰레기장에 설치되어 정확한 분리수거를 돕거나, 어린아이들의 분리수거 교육 등에 사용될 수 있을 것이다.
+
+## 팀원 소개
+팀명: Machine==우리조 
+
+||이름|역할|github|
+|--|------|---|---|
+|😙|김범수|-----|https://github.com/HYU-kbs|
+|🤗|김준태|FCN, FPN, DeepLab V3+ 실험|https://github.com/sronger|
+|😎|김지성|공용 실험 플랫폼 개발, UNet++ 실험, Pseudo Labeling 도구 개발, Object Mix Augmentation 도구 개발|https://github.com/intelli8786|
+|😆|백종원|-----|https://github.com/Baek-jongwon|
+|😊|정소희|PSPNet, DeepLabV3, SEResNext101+CBAM 실험|https://github.com/SoheeJeong|
+|😄|홍지연|-----|https://github.com/hongjourney|
+
+
+## 모델 성능 및 config file
+
+학습된 모델에 대한 설명과 성능, 각 모델에 대한 config file의 위치를 표로 나타내었다.
+config file은 hyperparameter, model architecture, optimizer, scheduler, train/test dataset 등 모델에 대한 전반적인 학습 정보를 포함한다. 
+
+> 표 내용 수정 필요
+
+|모델|mIoU|config|
+|------|---|---|
+|SwinTransformer, FasterR-CNN|0.530|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/tree/main/Models/swinT_fasterRCNN_fpn_config)|
+|SwinTransformer, FasterR-CNN, MultiScaleTTA|0.531|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/tree/main/Models/swinT_fasterRCNN_fpn_MultiScale_config)|
+|SwinTransformer, FasterR-CNN, TileAugTTA|0.530|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/tree/main/Models/swinT_fasterRCNN_fpn_TileAug_config)|
+|YOLOv4 416|0.441|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/blob/main/Models/YOLOv4_Darknet/yolov4_input416_batch64.cfg)|
+|YOLOv4 832|0.473|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/blob/main/Models/YOLOv4_Darknet/yolov4_input832_batch16.cfg)|
+|YOLOv5 x|0.459|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/tree/main/Models/YOLOv5)|
+
+
+
+## 실행파일 설명
+
+### Train
 이 코드는 다음 기능을 포함합니다.
  - pytorch 기반의 Semantic Segmentation Model 을 학습합니다.
  - config.json 파일을 통해 학습 인자를 제어할 수 있습니다.
@@ -43,7 +87,7 @@
     - data_train_transform : 학습에 사용될 전처리 transform을 정의합니다.
     - data_valid_transform : 검증에 사용될 전처리 transform을 정의합니다. ('Default'를 추천합니다.)
 
-# Test
+### Test
 이 코드는 다음 기능을 포함합니다.
  - pytorch 기반의 Semantic Segmentation Model 을 Inference 해서 submission.csv 파일을 생성합니다.
  - config.json 파일을 통해 추론 인자를 제어할 수 있습니다.
@@ -76,8 +120,6 @@
     - data_tta_transform : TTA에 사용될 transform을 정의합니다.
     - data_target_size : 추론 후 submission을 생성할 때 변환돨 이미지 크기를 정의합니다. (256을 추천합니다.)
 
---------
-
-## HRNet OCR 학습 필요 사항
+### HRNet OCR 학습 필요 사항
 - HRNet OCR 학습을 위해선 imagenet pretrained model을 다운받아야합니다.
 - 이 [링크](https://1drv.ms/u/s!Aus8VCZ_C_33dKvqI6pBZlifgJk)에서 hrnetv2_w48_imagenet_pretrained.pth 모델을 다운받아 `Modules/Hrnet_Sources/` 아래 두어야 합니다. 
