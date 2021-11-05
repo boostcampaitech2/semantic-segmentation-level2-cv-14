@@ -46,7 +46,7 @@
     - "train_data_transform_preprocess_valid" : 검증에 사용될 전처리 transform을 정의합니다. ('Default'를 추천합니다.)
 
 
-작성자 JiSeong Kim
+코드 작성자 JiSeong Kim
 최초 작성일 2021-10-28
 최종 작성일 2021-11-06
 '''

@@ -46,7 +46,7 @@
     - "test_pseudo_labeling_threshold_area" : pseudo labeling 이후 추론된 객체가 이 threshold 이하일 경우 제외합니다.
     - "test_pseudo_labeling_output_path" : pseudo labeling 결과로 저장될 coco format의 json파일 경로를 정의합니다.
 
-작성자 JiSeong Kim
+코드 작성자 JiSeong Kim
 최초 작성일 2021-10-28
 최종 작성일 2021-11-06
 '''
