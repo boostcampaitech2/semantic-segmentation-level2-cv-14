@@ -20,25 +20,31 @@
 |😎|김지성|공용 실험 플랫폼 개발, UNet++ 실험, Pseudo Labeling 도구 개발, Object Mix Augmentation 도구 개발|https://github.com/intelli8786|
 |😆|백종원|Unet++, DeepLab V3+ 실험|https://github.com/Baek-jongwon|
 |😊|정소희|PSPNet, DeepLab V3+, SEResNext101+CBAM 실험|https://github.com/SoheeJeong|
-|😄|홍지연|-----|https://github.com/hongjourney|
+|😄|홍지연|Unet, Hrnet OCR 실험|https://github.com/hongjourney|
 
 
 ## 모델 성능 및 config file
 
 학습된 모델에 대한 설명과 성능, 각 모델에 대한 config file의 위치를 표로 나타내었다.
-config file은 hyperparameter, model architecture, optimizer, scheduler, train/test dataset 등 모델에 대한 전반적인 학습 정보를 포함한다. 
+config file은 json 형식으로, hyperparameter, model architecture, optimizer, scheduler, train/test dataset 등 모델에 대한 전반적인 학습 정보를 포함한다. 
 
 > 표 내용 수정 필요
 
 |모델|mIoU|config|
 |------|---|---|
-|SwinTransformer, FasterR-CNN|0.530|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/tree/main/Models/swinT_fasterRCNN_fpn_config)|
-|SwinTransformer, FasterR-CNN, MultiScaleTTA|0.531|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/tree/main/Models/swinT_fasterRCNN_fpn_MultiScale_config)|
-|SwinTransformer, FasterR-CNN, TileAugTTA|0.530|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/tree/main/Models/swinT_fasterRCNN_fpn_TileAug_config)|
-|YOLOv4 416|0.441|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/blob/main/Models/YOLOv4_Darknet/yolov4_input416_batch64.cfg)|
-|YOLOv4 832|0.473|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/blob/main/Models/YOLOv4_Darknet/yolov4_input832_batch16.cfg)|
-|YOLOv5 x|0.459|[config](https://github.com/boostcampaitech2/object-detection-level2-cv-14/tree/main/Models/YOLOv5)|
-
+|DeepLabV3P_Effib4_NoAug|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/DeepLabV3P_Effib4_NoAug.json)|
+|Hrnet_Ocr_NoAug|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_NoAug.json)|
+|Hrnet_Ocr_aug|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug.json)|
+|Hrnet_Ocr_aug_gridmask|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_gridmask.json)|
+|Hrnet_Ocr_aug_pseudo|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_pseudo.json)|
+|PAN_ResNext101|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/PAN_ResNext101.json)|
+|PAN_ResNext101_pseudo|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/PAN_ResNext101_pseudo.json)|
+|PAN_ResNext101|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/PAN_ResNext101.json)|
+|UNetPP_Effib3_DiceCE_AdamW|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib3_DiceCE_AdamW.json)|
+|UNetPP_Effib3_DiceCE_AdamW_pseudo|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib3_DiceCE_AdamW_pseudo.json)|
+|UNetPP_Effib4|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4.json)|
+|UNetPP_Effib4_AdamW|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_AdamW.json)|
+|UNetPP_Effib4_DiceCE|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE.json)|
 
 
 ## 실행파일 설명
