@@ -51,9 +51,8 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 |UNetPP_Effib4_aug_DiceCE|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_DiceCE.json)|
 |UNetPP_Effib4_aug_DiceCE_AdamW|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_DiceCE_AdamW.json)|
 
-## 실행파일 설명
+## Code Description
 
-### 코드 상세 설명
 ##### Train.py
  - Semantic Segmentation Model 을 학습합니다.
  - config.json 파일을 통해 학습 인자를 제어할 수 있습니다.
