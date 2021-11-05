@@ -28,29 +28,28 @@
 학습된 모델에 대한 설명과 성능, 각 모델에 대한 config file의 위치를 표로 나타내었다.
 config file은 json 형식으로, hyperparameter, model architecture, optimizer, scheduler, train/test dataset 등 모델에 대한 전반적인 학습 정보를 포함한다. 
 
-|모델|mIoU|config|
-|------|---|---|
-|DeepLabV3P_Effib4_NoAug|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/DeepLabV3P_Effib4_NoAug.json)|
-|Hrnet_Ocr_NoAug|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_NoAug.json)|
-|Hrnet_Ocr_aug|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug.json)|
-|Hrnet_Ocr_aug_gridmask|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_gridmask.json)|
-|Hrnet_Ocr_aug_pseudo|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_pseudo.json)|
-|PAN_ResNext101|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/PAN_ResNext101.json)|
-|PAN_ResNext101_pseudo|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/PAN_ResNext101_pseudo.json)|
-|PAN_ResNext101|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/PAN_ResNext101.json)|
-|UNetPP_Effib3_DiceCE_AdamW|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib3_DiceCE_AdamW.json)|
-|UNetPP_Effib3_DiceCE_AdamW_pseudo|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib3_DiceCE_AdamW_pseudo.json)|
-|UNetPP_Effib4|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4.json)|
-|UNetPP_Effib4_AdamW|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_AdamW.json)|
-|UNetPP_Effib4_DiceCE|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE.json)|
-|UNetPP_Effib4_DiceCE_AdamW|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE_AdamW.json)|
-|UNetPP_Effib4_DiceCE_AdamW_ObMix|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE_AdamW_ObMix.json)|
-|UNetPP_Effib4_DiceCE_AdamW_ObMix_pseudo|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE_AdamW_ObMix_pseudo.json)|
-|UNetPP_Effib4_DiceCE_AdamW_pseudo|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE_AdamW_pseudo.json)|
-|UNetPP_Effib4_aug|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug.json)|
-|UNetPP_Effib4_aug_AdamW|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_AdamW.json)|
-|UNetPP_Effib4_aug_DiceCE|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_DiceCE.json)|
-|UNetPP_Effib4_aug_DiceCE_AdamW|--|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_DiceCE_AdamW.json)|
+|모델|config|
+|------|---|
+|DeepLabV3P_Effib4_NoAug|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/DeepLabV3P_Effib4_NoAug.json)|
+|Hrnet_Ocr_NoAug|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_NoAug.json)|
+|Hrnet_Ocr_aug|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug.json)|
+|Hrnet_Ocr_aug_gridmask|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_gridmask.json)|
+|Hrnet_Ocr_aug_pseudo|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_aug_pseudo.json)|
+|PAN_ResNext101|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/PAN_ResNext101.json)|
+|PAN_ResNext101_pseudo|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/PAN_ResNext101_pseudo.json)|
+|UNetPP_Effib3_DiceCE_AdamW|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib3_DiceCE_AdamW.json)|
+|UNetPP_Effib3_DiceCE_AdamW_pseudo|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib3_DiceCE_AdamW_pseudo.json)|
+|UNetPP_Effib4|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4.json)|
+|UNetPP_Effib4_AdamW|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_AdamW.json)|
+|UNetPP_Effib4_DiceCE|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE.json)|
+|UNetPP_Effib4_DiceCE_AdamW|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE_AdamW.json)|
+|UNetPP_Effib4_DiceCE_AdamW_ObMix|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE_AdamW_ObMix.json)|
+|UNetPP_Effib4_DiceCE_AdamW_ObMix_pseudo|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE_AdamW_ObMix_pseudo.json)|
+|UNetPP_Effib4_DiceCE_AdamW_pseudo|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_DiceCE_AdamW_pseudo.json)|
+|UNetPP_Effib4_aug|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug.json)|
+|UNetPP_Effib4_aug_AdamW|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_AdamW.json)|
+|UNetPP_Effib4_aug_DiceCE|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_DiceCE.json)|
+|UNetPP_Effib4_aug_DiceCE_AdamW|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_DiceCE_AdamW.json)|
 
 ## 실행파일 설명
 
