@@ -94,6 +94,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 
 <details open>
  <summary> 파일 명세 </summary>
+ 
     - Train.py : 학습을 위한 기능이 정의되어 있습니다. 이 파일을 사용해 Semantic Segmentation 모델을 학습할 수 있습니다.
 
     - Inference_Valid.py : Validation 데이터를 사용해 TTA, Dence CRF등을 실험하기 위한 기능이 정의되어 있습니다. 이 파일을 사용해 Validation 데이터에서 후처리 실험을 할 수 있습니다.
@@ -120,6 +121,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 </details>
 <details open>
  <summary> config 요소 명세 </summary>
+ 
     - "path_dataset_root" : 데이터셋이 저장된 root를 정의합니다.
     - "path_json_train" : train 데이터 json 파일을 정의합니다.
     - "path_json_valid" : valid 데이터 json 파일을 정의합니다.
@@ -178,7 +180,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 
 ### 실험 결과 도식화
 
-다음 [링크](https://www.edrawmind.com/online/map.html?sharecode=6184ef514b5544a49698555)는 실험 목록을 마인드맵 형식으로 도식화한 것이다.
+다음 [링크](https://www.edrawmind.com/online/map.html?sharecode=6184ef514b5544a49698555)는 실험 목록을 마인드맵 형식으로 도식화한 것다.
 ![Segmentation31-web-16349014493121112222112](https://user-images.githubusercontent.com/44287798/140483293-89c769c7-37fb-4b21-85b3-d14e3e882c57.png)
 
 
