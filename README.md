@@ -56,13 +56,13 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 
 ## Dependencies
 
-#### Sementation Models Pytorch [ref](https://github.com/qubvel/segmentation_models.pytorch) 
+#### 1. Sementation Models Pytorch [ref](https://github.com/qubvel/segmentation_models.pytorch) 
 `pip install -U git+https://github.com/qubvel/segmentation_models.pytorch`
 
-#### PyDenseCRF [ref](https://github.com/lucasb-eyer/pydensecrf#installation)
+#### 2. PyDenseCRF [ref](https://github.com/lucasb-eyer/pydensecrf#installation)
 `pip install git+https://github.com/lucasb-eyer/pydensecrf.git`
 
-#### HRNet Pretrained Model
+#### 3. HRNet Pretrained Model
 - HRNet OCR 학습을 위해선 imagenet pretrained model을 다운받아야합니다.
 - 이 [링크](https://1drv.ms/u/s!Aus8VCZ_C_33dKvqI6pBZlifgJk)에서 hrnetv2_w48_imagenet_pretrained.pth 모델을 다운받아 `Modules/Hrnet_Sources/` 아래 두어야 합니다. 
 
