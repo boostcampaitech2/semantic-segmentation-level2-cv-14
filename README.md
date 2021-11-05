@@ -54,10 +54,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 ## 실행파일 설명
 
 ### 코드 상세 설명
-<details>
- <summary> 이 프로젝트는 다음 기능을 포함합니다. </summary>
- 
- ##### Train.py
+##### Train.py
  - Semantic Segmentation Model 을 학습합니다.
  - config.json 파일을 통해 학습 인자를 제어할 수 있습니다.
 
@@ -96,7 +93,6 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
  - 출력
     Validation 데이터로 추론했을때의 모델의 성능을 출력합니다.
 
-</details>
 <details>
  <summary> 파일 명세 </summary>
     - Train.py : 학습을 위한 기능이 정의되어 있습니다. 이 파일을 사용해 Semantic Segmentation 모델을 학습할 수 있습니다.
@@ -122,7 +118,7 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
     - Utils/Tools.py : 각종 편의기능들이 정의되어 있습니다.
 
     - Utils/utils.py : Semantic Segmentation score 계산을 위한 도구들이 정의되어 있습니다.
-    
+
 </details>
 <details>
  <summary> config 요소 명세 </summary>
