@@ -69,6 +69,20 @@ def HorizontalFlip_Rotate90_GridMask():
         ToTensorV2()
     ])
 
+
+def HorizontalFlip_Rotate90_CLAHE_GridMask():
+    return alb.Compose(
+        [
+            alb.HorizontalFlip(p=0.5),
+            alb.RandomRotate90(p=0.5),
+            alb.CLAHE(p=0.5, clip_limit=2, tile_grid_size=(20, 20)),
+            alb.GridDropout(holes_number_x=5,holes_number_y=5,ratio=0.3, p=0.5),
+            alb.Normalize(),
+            ToTensorV2(),
+        ]
+    )
+    
+
 def ObjectAugmentation():
     return alb.Compose([
         alb.ShiftScaleRotate((-0.5,0.5),(-0.5,0.5),(-45,45), border_mode=cv2.BORDER_CONSTANT),
