@@ -23,12 +23,12 @@
 |😄|홍지연|Unet, Hrnet OCR 실험|https://github.com/hongjourney|
 
 
-## 모델 성능 및 config file
+## 모델 성능 및 Config File
 
 학습된 모델에 대한 설명과 성능, 각 모델에 대한 config file의 위치를 표로 나타내었다.
 config file은 json 형식으로, hyperparameter, model architecture, optimizer, scheduler, train/test dataset 등 모델에 대한 전반적인 학습 정보를 포함한다. 
 
-|모델|config|
+|모델|Config|
 |------|---|
 |DeepLabV3P_Effib4_NoAug|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/DeepLabV3P_Effib4_NoAug.json)|
 |Hrnet_Ocr_NoAug|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/Hrnet_Ocr_NoAug.json)|
@@ -54,13 +54,18 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
 |UNetPP_Effib4_aug_DiceCE|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_DiceCE.json)|
 |UNetPP_Effib4_aug_DiceCE_AdamW|[config](https://github.com/boostcampaitech2/semantic-segmentation-level2-cv-14/blob/master/Configs/UNetPP_Effib4_aug_DiceCE_AdamW.json)|
 
-## Installation
+## Dependencies
 
 #### Sementation Models Pytorch [ref](https://github.com/qubvel/segmentation_models.pytorch) 
 `pip install -U git+https://github.com/qubvel/segmentation_models.pytorch`
 
 #### PyDenseCRF [ref](https://github.com/lucasb-eyer/pydensecrf#installation)
 `pip install git+https://github.com/lucasb-eyer/pydensecrf.git`
+
+#### HRNet Pretrained Model
+- HRNet OCR 학습을 위해선 imagenet pretrained model을 다운받아야합니다.
+- 이 [링크](https://1drv.ms/u/s!Aus8VCZ_C_33dKvqI6pBZlifgJk)에서 hrnetv2_w48_imagenet_pretrained.pth 모델을 다운받아 `Modules/Hrnet_Sources/` 아래 두어야 합니다. 
+
 
 ## Code Description 
 
@@ -179,11 +184,6 @@ config file은 json 형식으로, hyperparameter, model architecture, optimizer,
     - "test_pseudo_labeling_threshold_area" : pseudo labeling 이후 추론된 객체가 이 threshold 이하일 경우 제외합니다.
     - "test_pseudo_labeling_output_path" : pseudo labeling 결과로 저장될 coco format의 json파일 경로를 정의합니다.
 </details>
-
-
-### HRNet OCR 학습 필요 사항
-- HRNet OCR 학습을 위해선 imagenet pretrained model을 다운받아야합니다.
-- 이 [링크](https://1drv.ms/u/s!Aus8VCZ_C_33dKvqI6pBZlifgJk)에서 hrnetv2_w48_imagenet_pretrained.pth 모델을 다운받아 `Modules/Hrnet_Sources/` 아래 두어야 합니다. 
 
 
 
